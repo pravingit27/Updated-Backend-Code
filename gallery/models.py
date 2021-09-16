@@ -25,7 +25,6 @@ class size(models.Model):
 class meet(models.Model):
     category_name = models.ForeignKey(category,related_name='categories',on_delete=models.CASCADE)
     size_name = models.ForeignKey(size,related_name='size_name',on_delete=models.CASCADE)
-    final = models.ForeignKey("gallery.image",related_name='images',on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f'{self.category_name} and {self.size_name}'

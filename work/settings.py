@@ -38,11 +38,29 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'gallery',
 	'rest_framework',
+	'corsheaders',
+    'rest_framework.authtoken',
+	'storages',
+]
+
+CORS_ALLOWED_ORIGINS= [
+    'http://www.website.com',
+    'http://localhost:8000',
+    'http://localhost:3000',
+    'https://web.postman.co',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'PUT',
+    'DELETE',
+    'POST',
 ]
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'corsheaders.middleware.CorsMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -127,3 +145,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AWS_ACCESS_KEY_ID = 'AKIAQJUWIMRHUIQSXI54'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = '3d-image-storage'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+#AWS_S3_REGION_NAME = 'US West (N. California)us-west-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
