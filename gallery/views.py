@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import CategorySerializer,SizeSerializer,DetailSerializer,ImageSerializer
-from rest_framework import generics, serializers
+from rest_framework import generics, serializers, views
 from .models import size,category,meet,image
 from rest_framework import viewsets
 
@@ -19,7 +19,6 @@ class CategoryView(viewsets.ModelViewSet):
 	serializer_class = CategorySerializer
 	lookup_field = 'slug'
 	
-
 class ListSize(generics.ListCreateAPIView):
 	queryset = size.objects.all()
 	serializer_class = SizeSerializer
@@ -28,13 +27,18 @@ class DetailSize(generics.RetrieveUpdateDestroyAPIView):
 	queryset = size.objects.all()
 	serializer_class = SizeSerializer
 
-class ListMeet(generics.ListCreateAPIView):
+'''class ListMeet(generics.ListCreateAPIView):
 	queryset = meet.objects.all()
 	serializer_class = DetailSerializer
 
 class DetailMeet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = meet.objects.all()
+	serializer_class = DetailSerializer'''
+
+class ResultView(viewsets.ModelViewSet):
+	queryset = meet.objects.all()
 	serializer_class = DetailSerializer
+	#lookup_field = 'slug'
 
 '''class ListImage(generics.ListCreateAPIView):
 	queryset = image.objects.all()
@@ -47,5 +51,5 @@ class DetailImage(generics.RetrieveUpdateDestroyAPIView):
 class ImageView(viewsets.ModelViewSet):
 	queryset = image.objects.all()
 	serializer_class = ImageSerializer
-	lookup_field = 'slug'
+	#lookup_field = 'slug'
 

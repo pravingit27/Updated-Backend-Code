@@ -22,20 +22,21 @@ class SizeSerializer(serializers.ModelSerializer):
 												  # lookup_url_kwarg='slug', lookup_field='slug')
 	class Meta:
 		model = size
-
 		fields = ('pk','size')
 		#exclude = ['slug',]
 
 class ImageMeetSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = image
-		fields = ('image_name','amount')
+		fields = ('image_name','image')
 
 class DetailSerializer(serializers.ModelSerializer):
-	images= ImageMeetSerializer(many=True,read_only=True)
+	output= ImageMeetSerializer(many=True,read_only=True)
 	class Meta:
 		model = meet
-		fields = ('id','category_name','size_name','images')
+		fields = ('id','category_name','size_name','output')
+		#read_only_fields = ('url',)
+		#extra_kwargs = {'url': {'lookup_field': 'slug'}}
 
 	def to_representation(self,instance):
 		result = super(DetailSerializer,self).to_representation(instance)
@@ -43,15 +44,22 @@ class DetailSerializer(serializers.ModelSerializer):
 		result['category_name'] = instance.category_name.name
 		return result
 
-class ImageSerializer(WritableNestedModelSerializer,serializers.HyperlinkedModelSerializer):
+class ImageSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
 	image = serializers.ImageField(max_length=None,allow_empty_file=False,allow_null=True,required=False)
-	relation = DetailSerializer()
+	#relation = DetailSerializer()
 
 	class Meta:
 		model = image
-		fields = ('pk','relation','url','slug','image','image_name','amount')
-		read_only_fields = ('url',)
-		extra_kwargs = {'url': {'lookup_field': 'slug'}}
+		fields = ('pk','relation','image','image_name','amount')
+		#read_only_fields = ('url',)
+		#extra_kwargs = {'url': {'lookup_field': 'slug'}}
+
+	def to_representation(self,instance):
+		result = super(ImageSerializer,self).to_representation(instance)
+		result['relation'] = f'{instance.relation.category_name} + {instance.relation.size_name}'
+		#result['category_name'] = instance.category_name.name
+		return result
+
 
 	
 
