@@ -43,14 +43,15 @@ class DetailSerializer(serializers.ModelSerializer):
 		result['size_name'] = instance.size_name.size
 		result['category_name'] = instance.category_name.name
 		return result
-
+	
 class ImageSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
+	#image = serializers.ListField(
 	image = serializers.ImageField(max_length=None,allow_empty_file=False,allow_null=True,required=False)
 	#relation = DetailSerializer()
 
 	class Meta:
 		model = image
-		fields = ('pk','relation','image','image_name','amount')
+		fields = ('pk','relation','image','image_name')
 		#read_only_fields = ('url',)
 		#extra_kwargs = {'url': {'lookup_field': 'slug'}}
 
@@ -60,6 +61,8 @@ class ImageSerializer(WritableNestedModelSerializer,serializers.ModelSerializer)
 		#result['category_name'] = instance.category_name.name
 		return result
 
+
+		   
 
 	
 

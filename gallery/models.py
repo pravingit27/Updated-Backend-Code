@@ -37,7 +37,7 @@ class image(models.Model):
     #slug = models.SlugField(max_length=100,unique=True,default=None,null=True,blank=True)
     relation = models.ForeignKey(meet,related_name='output',on_delete=models.CASCADE)
     image_name = models.CharField(max_length=300)
-    amount = models.FloatField(default=True,blank=True,null=True)
+    #amount = models.FloatField(default=True,blank=True,null=True)
     date_created = models.DateTimeField(auto_now = True)
 
     class Meta:

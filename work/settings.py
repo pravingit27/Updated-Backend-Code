@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
 	'corsheaders',
     'rest_framework.authtoken',
 	'storages',
+	'drf_yasg',
 ]
 
 CORS_ALLOWED_ORIGINS= [
@@ -146,9 +149,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_ACCESS_KEY_ID = 'AKIAQJUWIMRHUIQSXI54'
-AWS_SECRET_ACCESS_KEY = '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'
+#AWS_ACCESS_KEY_ID = 'AKIAQJUWIMRHUIQSXI54'
+#AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = '3d-image-storage'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID',)
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY',)
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 #AWS_S3_REGION_NAME = 'US West (N. California)us-west-1'
 AWS_S3_FILE_OVERWRITE = False
