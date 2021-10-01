@@ -32,8 +32,11 @@ class meet(models.Model):
     def __str__(self):
         return f'{self.category_name} and {self.size_name}'
 
+def get_upload_path(instance, filename):
+    return 'post_images/{0}/{1}'.format(instance.relation.category_name, filename)
+
 class image(models.Model):
-    image = models.ImageField(null=True,blank=True,upload_to='post_images')
+    images = models.ImageField(null=True,blank=True,upload_to='post_images')
     #slug = models.SlugField(max_length=100,unique=True,default=None,null=True,blank=True)
     relation = models.ForeignKey(meet,related_name='output',on_delete=models.CASCADE)
     image_name = models.CharField(max_length=300)

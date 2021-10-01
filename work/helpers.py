@@ -1,5 +1,5 @@
-def modify_input_for_multiple_files(relation,image):
+def modify_input_for_multiple_files(relation,images):
     dict = {}
     dict['relation'] = relation
-    dict['image'] = image
+    dict['images'] = images
     return dict

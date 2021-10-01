@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -149,8 +148,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AWS_ACCESS_KEY_ID = 'AKIAQJUWIMRHUIQSXI54'
-#AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = '3d-image-storage'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID',)
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY',)
@@ -160,3 +157,4 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL = None
